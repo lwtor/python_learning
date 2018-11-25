@@ -61,3 +61,8 @@ print(list((x * x) + 1 for x in range(1, 10) if x % 2 == 0))
 从打印出来的信息可以知道，生成器是一个对象。  
 通过 `next()` 方法可以打印生成器中的一个对象，当超过生成器的容量之后，会抛出 `StopIteration` 错误。  
 将 `return` 语句替换成 `yield` ，则每次执行函数的时候，执行到 `yield` 语句的时候就会返回，当下一次执行的时候会从上一次返回的地方继续执行。
+
+#### 迭代器
+- 可作用于 `for` 循环的对象都是 `Iterable` 类型
+- 可作用于 `next()` 函数的对象都是 `Iterator` 类型
+- `list` , `dict` , `str` 都是 `Iterable` 但不是 `Iterator` ，可以通过 `iter()` 函数获得一个 `Iterator` 对象 
