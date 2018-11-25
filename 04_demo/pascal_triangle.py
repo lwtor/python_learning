@@ -21,10 +21,31 @@ def pascal_triangle_print(max):
         cur = []
         column += 1
 
+def pascal_triangle_plus(max):
+    pre = [1]
+    cur = []
+    column = 1
+    print(pre)
+    while(column < max):
+        length = len(pre)
+        cur.append(1)
+        for index in range(1, length):
+            cur.append(pre[index - 1] + pre[index])
+        cur.append(1)
+        print(cur)
+        pre = cur
+        cur = []
+        column += 1
+
 def triangles():
     y=[1]
     while True:
         yield y
-        y=[1]+[y[i]+y[i+1]for i in xrange(len(y)-1)]+[1]
+        y=[1]+[y[i]+y[i+1]for i in range(len(y)-1)]+[1]
 
-pascal_triangle_print(5)
+pascal_triangle_print(10)
+pascal_triangle_plus(10)
+
+func = triangles()
+for i in range(0, 10):
+    print(next(func))
