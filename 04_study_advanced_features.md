@@ -42,3 +42,16 @@ for index in enumerate(l):
   print(index)
 
 ```
+
+#### 列表生成式
+```python
+# range()函数会生成从 1~9 的序列
+print('range(1, 10): ', list(range(1, 10)))
+
+# 对range()生成的序列做二次处理，将处理后的序列转为list
+print([x * x for x in range(1, 10)])
+print(list(x * x for x in range(1, 10)))
+
+# 筛选range()生成的序列
+print(list((x * x) + 1 for x in range(1, 10) if x % 2 == 0))
+```
