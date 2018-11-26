@@ -10,5 +10,3 @@ print(sorted(['bob', 'about', 'Zoo', 'Credit']))
 print(sorted(['bob', 'about', 'Zoo', 'Credit'], key=str.lower))
 
 print(sorted([2,334,58, 43, 32, 45, 79,], key=func))
-
-print(str.lower('AABc'))
