@@ -60,3 +60,38 @@ list(filter(is_odd, [1, 2, 4, 5, 6, 9, 10, 15]))
 将函数作为返回值  
 通过一个函数，返回另一个函数，在外层函数中的变量可以被返回的函数使用，因为在返回内部的函数时，相关的变量都已经被保存到返回函数中了，这就叫 `闭包`  
 返回函数并不会立即被执行，只有进行调用后才会执行函数  
+
+#### 装饰器
+装饰器decorator就是一个返回函数的高阶函数  
+```python
+def log(func):
+    print('log', func)
+    @functools.wraps
+    def wrapper(*args, **kw):
+        print('call %s()' %(func.__name__))
+        return func(*args, **kw)
+    return wrapper
+
+@log
+def func():
+  pass
+```
+
+上面的代码，为 `func` 函数设置了适配器 `log` , 这样在调用 `func` 函数的时候，其实真正调用的是 `log` 函数，而 `log` 接受的就是一个函数，并返回 `wrapper` 函数，所以其实最后被调用的就是 `wrapper` 函数。相当于执行了 `log(func)()` ，这里的 `log(func)` 其实就是 `wrapper` 函数本身  
+
+如果需要向装饰器传递参数，只需要在装饰器上嵌套多一层，也就是装饰器本身返回的是另一个装饰器，但是这样在使用 `@` 的时候稍有不一样，以为 `@` 后面的装饰器应该是一个接受函数作为参数的函数  
+
+如果在使用装饰器时候，修改了原来函数名的指向，原本的函数名就不再指向最初的函数了，这个时候函数的 `__name__` 字段就会被改变了，如果不希望被改变，可以使用 `functools.wraps` 装饰器来修饰返回的函数  
+
+#### 偏函数
+`functools.partial`  
+返回一个预先设定好某些参数的指定函数  
+```python
+from functools import partial
+
+# 创建一个输出一条分割线的函数
+print_line = partial(print, '------------------------')
+
+# 创建一个分隔符为 * 的 print 函数
+p_start = partial(print, sep='*')
+```
