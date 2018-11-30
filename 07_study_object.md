@@ -78,3 +78,30 @@ class Animal(object):
 ```
 
 #### @property
+对于一个类，可以直接对属性进行赋值，但是这样就可以赋值任意类型或者任意的内容。也可以使用 `setter` 的方式对赋值的内容进行约束，但是调用形式麻烦。  
+通过 `@property` 关键可以对类的属性进行约束。同时，又可以通过属性进行赋值。  
+ `@property` 的内部是通过装饰器实现的。  
+
+通过 `@property` 相当于定义了一个类的一个属性的 `getter` 方法。  
+通过 `@xxx.setter` 相当于定义了一个类的一个属性的 `setter` 方法  
+
+```python
+class Student(object):
+    # 定义 score 参数，相当于 getter 方法
+    @property
+    def score(self):
+        return self._score
+
+    # 定义 score 参数的 setter 方法， 实例化的对象可以通过 studfent.score=xx 进行调用
+    @score.setter
+    def score(self, value):
+        if not isinstance(value, int):
+            raise ValueError('score must be an integer')
+        if value < 0 or value > 100:
+            raise ValueError('score must between 0 ~ 100 !')
+        self._score = value
+
+    s1 = Student()
+    # 相当于 s1.score(10)
+    s1.score = 10
+```
