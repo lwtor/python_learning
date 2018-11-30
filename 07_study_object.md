@@ -39,3 +39,42 @@ types 模块
 
 `hasattr(obj, attr)`  
 是否有指定的属性  
+
+#### __slots__
+通过一下的方式可以给一个类添加额外的属性和方法  
+```python
+from types import MethodType
+
+class Student(object):
+    pass
+
+s = Student()
+# 为 实例 添加属性
+s.name = 'lwtor'
+print(s.name)
+
+# 为 实例 添加方法
+def say_hello(self):
+    print('hello, I am %s' %(self.name))
+
+s.say_hello = MethodType(say_hello, s)
+s.say_hello()
+
+# 为类添加方法和属性
+Student.say_hello = say_hello
+Student.name = ''
+
+s2 = Student()
+s2.name = 'allen'
+s2.say_hello()
+```
+
+使用 `__slots__` 可以显示对类的属性，禁止添加其他的属性  
+ `__slots__` 关键字只对当前类生效，对其子类不起作用
+```python
+class Animal(object):
+  # 只能使用定义的属性
+    __slots__ = ('name', 'age')
+```
+
+#### @property
