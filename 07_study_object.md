@@ -138,3 +138,23 @@ Month = Enmu('Month', ('Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', '
 for name, member in Month.__members__.items():
   print(name, '=>', member, ',', member.value)
 ```
+`value` 属性是自动赋给成员的int常量，计数从1开始
+
+#### 元类
+每一个对象都是由 `type()` 函数创建的  
+`type()` 函数也可以创建新的类型  
+```python
+def fn(self, name='World'):
+    print('Hello %s' %name)
+
+Hello = type('Hello', (object, ), dict(hello = fn))
+
+h = Hello()
+h.hello()
+```
+其中第一个参数为class的名称  
+第二个参数为继承的父类集合，使用tuple  
+第三个参数为方法名和函数的绑定
+
+使用元类 `metaclass` 可以给一个类添加方法，生成一个新的类  
+已知的用法是 `ORM` 框架中
