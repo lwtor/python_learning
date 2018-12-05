@@ -105,3 +105,36 @@ class Student(object):
     # 相当于 s1.score(10)
     s1.score = 10
 ```
+
+#### 多继承
+```python
+def Cat(Animal, Runnable):
+  pass
+```
+
+将功能性的类名命名为 `xxxMixIn` ，应该只是一种约定俗成的命名规则，暂未发现其他用处
+
+#### 定制类
+- \__str__ :  
+  通过 `print` 打印对象信息，类似于 `toString()` 方法
+- \__repr__ :  
+  直接通过对象本身调用
+- \__iter__ :  
+  返回迭代对象。
+- \__next__ :  
+  由 `for` 调用，每次返回循环的下一个值
+- \__getitem__ :  
+  通过类似数组的方式，访问随机元素 `s[5]` ,如果需要使用 `切片` 则需要在方法内部做判断
+- \__getattr__ :  
+  当调用一个不存在的属性时，会试图通过该方法来尝试获取属性值
+- \__call__ :
+  通过对象本身进行调用
+
+#### 枚举类
+```python
+from enum import enum
+Month = Enmu('Month', ('Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'))
+
+for name, member in Month.__members__.items():
+  print(name, '=>', member, ',', member.value)
+```
